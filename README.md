@@ -1,4 +1,3 @@
-```markdown
 # blinkChat 💬
 
 A real-time chat application built with Node.js, Express, MongoDB, and Socket.IO — featuring automatic deletion of ignored messages after notification, keeping conversations fresh and clutter-free.
