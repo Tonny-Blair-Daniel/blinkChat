@@ -35,5 +35,5 @@ A real-time chat application built with Node.js, Express, MongoDB, and Socket.IO
 
 ## ✨ Author
 
-**Your Name** – [Tonny-Blair-Daniel](https://github.com/yourGitHub)
+[Tonny-Blair-Daniel](https://github.com/yourGitHub)
 
