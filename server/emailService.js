@@ -11,7 +11,6 @@ const transporter = nodemailer.createTransport({
 console.log('[DEBUG] EMAIL_USER:', process.env.EMAIL_USER);
 console.log('[DEBUG] EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Loaded' : '❌ MISSING');
 
-
 async function sendVerificationEmail(email, code) {
     const mailOptions = {
         from: process.env.EMAIL_USER,
@@ -29,4 +28,21 @@ async function sendVerificationEmail(email, code) {
     }
 }
 
-module.exports = { sendVerificationEmail };
+async function sendPasswordResetEmail(email, code) {
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'blinkChat Password Reset Code',
+        text: `Your password reset code for blinkChat is: ${code}\nThis code is valid for 10 minutes.`
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        console.log(`Password reset email sent to ${email}`);
+    } catch (err) {
+        console.error('Error sending password reset email:', err);
+        throw new Error('Failed to send password reset email');
+    }
+}
+
+module.exports = { sendVerificationEmail, sendPasswordResetEmail };

@@ -6,6 +6,8 @@ const userSchema = new mongoose.Schema({
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     verificationCode: { type: String, default: null },
     verificationCodeExpires: { type: Date, default: null },
-    isVerified: { type: Boolean, default: false }
+    isVerified: { type: Boolean, default: false },
+    resetPasswordCode: { type: String, default: null },
+    resetPasswordCodeExpires: { type: Date, default: null }
 });
 module.exports = mongoose.model('User', userSchema);
