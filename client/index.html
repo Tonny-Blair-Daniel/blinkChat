@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blinkChat - Ephemeral Messaging Done Right</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">blinkChat</h1>
+            <div class="space-x-4">
+                <a href="login.html" class="hover:text-gray-300">Login</a>
+                <a href="login.html#signup" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-20 text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Welcome to blinkChat</h2>
+            <p class="text-lg md:text-xl mb-8">Messages that vanish when ignored, chat securely, stay clutter-free.</p>
+            <a href="login.html#signup" class="bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100">
+                Get Started <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center text-gray-800 mb-12">Why blinkChat?</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center">
+                    <i class="fas fa-trash-alt text-blue-500 text-3xl mb-4"></i>
+                    <h4 class="text-xl font-semibold mb-2">Ephemeral Messaging</h4>
+                    <p class="text-gray-600">Unread messages auto-delete when you come online, keeping your chats clean.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center">
+                    <i class="fas fa-lock text-blue-500 text-3xl mb-4"></i>
+                    <h4 class="text-xl font-semibold mb-2">Secure Conversations</h4>
+                    <p class="text-gray-600">Your messages are protected with robust encryption for privacy.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md text-center">
+                    <i class="fas fa-mobile-alt text-blue-500 text-3xl mb-4"></i>
+                    <h4 class="text-xl font-semibold mb-2">Mobile-Friendly</h4>
+                    <p class="text-gray-600">Chat seamlessly on any device with our responsive design.</p>
+                </div>
+            </div>
+        </section>
+
+    <!-- CTA Section -->
+    <section class="bg-blue-600 text-white py-16 text-center">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold mb-4">Ready to Chat?</h3>
+            <p class="text-lg mb-8">Join blinkChat now and experience messaging that’s secure and clutter-free.</p>
+            <a href="login.html#signup" class="bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-gray-100">
+                Sign Up Now <i class="fas fa-user-plus ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 blinkChat. All rights reserved.</p>
+            <!--
+            <div class="mt-4 space-x-4">
+                <a href="/privacy" class="hover:text-gray-300">Privacy Policy</a>
+                <a href="/terms" class="hover:text-gray-300">Terms of Service</a>
+                <a href="/contact" class="hover:text-gray-300">Contact Us</a>
+            </div>
+        -->
+        </div>
+    </footer>
+</body>
+</html>

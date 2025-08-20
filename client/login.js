@@ -29,6 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleNewPasswordBtn = document.getElementById('toggleNewPassword');
     const toggleConfirmNewPasswordBtn = document.getElementById('toggleConfirmNewPassword');
 
+    if (window.location.hash === '#signup') {
+        //toggleMode();
+        formTitle.textContent = 'Sign Up';
+        submitBtn.textContent = 'Sign Up';
+        toggleText.textContent = 'Already have an account?';
+        toggleAuthModeBtn.textContent = 'Login';
+        usernameContainer.style.display = 'block';
+        confirmPasswordContainer.style.display = 'block';
+        usernameInput.required = true;
+        confirmPasswordInput.required = true;
+        authForm.classList.remove('hidden');
+        verifyForm.classList.add('hidden');
+        resetPasswordForm.classList.add('hidden');
+        resetCodeForm.classList.add('hidden');
+        newPasswordForm.classList.add('hidden');
+        forgotPasswordBtn.classList.add('hidden');
+    }
+
     if (window.location.search.includes('email') || window.location.search.includes('password')) {
         console.warn('Sensitive data detected in URL, redirecting to clean URL');
         window.location.href = 'login.html';

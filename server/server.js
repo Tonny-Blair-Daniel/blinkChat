@@ -35,8 +35,20 @@ app.use('/api/user', userRoutes);
 app.use('/api/message', messageRoutes);
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'client', 'login.html'));
+    res.sendFile(path.join(__dirname, '..', 'client', 'index.html'));
 });
+
+/*
+app.get('/privacy', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'privacy.html'));
+});
+app.get('/terms', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'terms.html'));
+});
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'client', 'contact.html'));
+});
+*/
 
 // Cleanup expired unverified users
 setInterval(async () => {
