@@ -58,9 +58,9 @@ setInterval(async () => {
             isVerified: false,
             verificationCodeExpires: { $lte: now }
         });
-        console.log(`Cleaned up ${deletedUsers.deletedCount} unverified users`);
+        //console.log(`Cleaned up ${deletedUsers.deletedCount} unverified users`);
     } catch (err) {
-        console.error('Error cleaning up unverified users:', err);
+        //console.error('Error cleaning up unverified users:', err);
     }
 }, 60 * 1000); // Run every minute
 
@@ -71,12 +71,12 @@ setInterval(async () => {
         const messagesToDelete = await Message.find({
             deleteAfter: { $ne: null, $lte: now }
         });
-        console.log(`Found ${messagesToDelete.length} messages to delete`);
+        //console.log(`Found ${messagesToDelete.length} messages to delete`);
         for (const msg of messagesToDelete) {
             const receiverId = msg.receiver.toString();
             const senderId = msg.sender.toString();
             await Message.deleteOne({ _id: msg._id });
-            console.log(`Deleted message ${msg._id} from ${senderId} to ${receiverId}`);
+            //console.log(`Deleted message ${msg._id} from ${senderId} to ${receiverId}`);
             const receiverSocketId = onlineUsers[receiverId];
             const senderSocketId = onlineUsers[senderId];
             if (receiverSocketId) {
@@ -84,14 +84,14 @@ setInterval(async () => {
                     messageId: msg._id.toString(),
                     senderId: senderId
                 });
-                console.log(`Notified receiver ${receiverId} (socket ${receiverSocketId}) of deleted message ${msg._id}`);
+                //console.log(`Notified receiver ${receiverId} (socket ${receiverSocketId}) of deleted message ${msg._id}`);
             }
             if (senderSocketId && senderSocketId !== receiverSocketId) {
                 io.to(senderSocketId).emit('messageDeleted', {
                     messageId: msg._id.toString(),
                     senderId: senderId
                 });
-                console.log(`Notified sender ${senderId} (socket ${senderSocketId}) of deleted message ${msg._id}`);
+                //console.log(`Notified sender ${senderId} (socket ${senderSocketId}) of deleted message ${msg._id}`);
             }
             io.emit('updateUnreadCounts');
         }
@@ -101,7 +101,7 @@ setInterval(async () => {
 }, 10 * 1000); // Run every 10 seconds
 
 io.on('connection', (socket) => {
-    console.log(`🟢 New socket connection: ${socket.id}`);
+    //console.log(`🟢 New socket connection: ${socket.id}`);
 
     socket.on('setUserId', async (userId) => {
         if (!userId || !/^[0-9a-fA-F]{24}$/.test(userId)) {
@@ -115,7 +115,7 @@ io.on('connection', (socket) => {
                 return;
             }
             onlineUsers[userId] = socket.id;
-            console.log(`User ${userId} is online with socket ID ${socket.id}`);
+            //console.log(`User ${userId} is online with socket ID ${socket.id}`);
             io.emit('userOnlineStatus', onlineUsers);
 
             const now = new Date();
@@ -128,7 +128,7 @@ io.on('connection', (socket) => {
                 },
                 { $set: { deleteAfter: deleteAfterTime } }
             );
-            console.log(`Set deleteAfter for unread messages of user ${userId}`);
+            //console.log(`Set deleteAfter for unread messages of user ${userId}`);
         } catch (err) {
             console.error(`Error setting up user ${userId}:`, err);
             socket.emit('error', { msg: 'Failed to set user online status' });
@@ -142,7 +142,7 @@ io.on('connection', (socket) => {
         }
         const roomId = [senderId.toString(), receiverId.toString()].sort().join('_');
         socket.join(roomId);
-        console.log(`Socket ${socket.id} (user ${senderId}) joined room: ${roomId}`);
+        //console.log(`Socket ${socket.id} (user ${senderId}) joined room: ${roomId}`);
     });
 
     socket.on('sendMessage', async ({ sender, receiver, content }) => {
@@ -174,12 +174,12 @@ io.on('connection', (socket) => {
                 timestamp: newMsg.timestamp.toISOString(),
                 _id: newMsg._id.toString()
             });
-            console.log(`Message emitted to room ${roomId} from ${senderIdStr} to ${receiverIdStr}`);
+            //console.log(`Message emitted to room ${roomId} from ${senderIdStr} to ${receiverIdStr}`);
 
             const receiverSocketId = onlineUsers[receiverIdStr];
             if (receiverSocketId && receiverSocketId !== socket.id) {
                 io.to(receiverSocketId).emit('updateUnreadCounts');
-                console.log(`Emitted updateUnreadCounts to ${receiverIdStr} (socket ${receiverSocketId})`);
+                //console.log(`Emitted updateUnreadCounts to ${receiverIdStr} (socket ${receiverSocketId})`);
             }
         } catch (err) {
             console.error('Error saving message:', err);
@@ -197,7 +197,7 @@ io.on('connection', (socket) => {
             }
         }
         if (disconnectedUserId) {
-            console.log(`User ${disconnectedUserId} (socket ID ${socket.id}) disconnected`);
+            //console.log(`User ${disconnectedUserId} (socket ID ${socket.id}) disconnected`);
             io.emit('userOnlineStatus', onlineUsers);
         }
     });

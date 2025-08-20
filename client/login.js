@@ -29,8 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleNewPasswordBtn = document.getElementById('toggleNewPassword');
     const toggleConfirmNewPasswordBtn = document.getElementById('toggleConfirmNewPassword');
 
+
+    let isLoginMode = true;
+    let pendingEmail = null;
+
     if (window.location.hash === '#signup') {
-        //toggleMode();
+        isLoginMode = false;
         formTitle.textContent = 'Sign Up';
         submitBtn.textContent = 'Sign Up';
         toggleText.textContent = 'Already have an account?';
@@ -52,9 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'login.html';
         return;
     }
-
-    let isLoginMode = true;
-    let pendingEmail = null;
 
     function toggleMode() {
         isLoginMode = !isLoginMode;

@@ -49,7 +49,7 @@ async function validateUser() {
         return false;
     }
     try {
-        console.log(`Validating user ID: ${user.id}`);
+        //console.log(`Validating user ID: ${user.id}`);
         const res = await fetch(`/api/user/validate/${user.id}`);
         const data = await res.json();
         if (!res.ok) {
@@ -58,7 +58,7 @@ async function validateUser() {
             window.location.href = 'login.html';
             return false;
         }
-        console.log('User validated successfully:', user.id);
+        //console.log('User validated successfully:', user.id);
         return true;
     } catch (err) {
         console.error('Network error validating user:', err);
@@ -82,11 +82,11 @@ if (user.id && user.username) {
 
 async function fetchUnreadCounts() {
     try {
-        console.log(`Fetching unread counts for user: ${user.id}`);
+        //console.log(`Fetching unread counts for user: ${user.id}`);
         const res = await fetch(`/api/message/unread/${user.id}`);
         if (res.ok) {
             persistentUnreadCounts = await res.json();
-            console.log("Fetched unread counts:", persistentUnreadCounts);
+            //console.log("Fetched unread counts:", persistentUnreadCounts);
             loadFriends();
             loadOtherUsers();
         } else {
@@ -168,7 +168,7 @@ async function startChat(receiverId, username) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ readerId: user.id, chatPartnerId: receiverId })
         });
-        console.log("Messages marked as read.");
+        //console.log("Messages marked as read.");
         persistentUnreadCounts[receiverId] = 0;
         loadFriends();
     } catch (err) {
@@ -278,12 +278,12 @@ socket.on('receiveMessage', msg => {
 });
 
 socket.on('updateUnreadCounts', () => {
-    console.log('Received updateUnreadCounts event');
+    //console.log('Received updateUnreadCounts event');
     fetchUnreadCounts();
 });
 
 socket.on('messageDeleted', ({ messageId, senderId }) => {
-    console.log(`Received messageDeleted event for message ${messageId} from ${senderId}`);
+    //console.log(`Received messageDeleted event for message ${messageId} from ${senderId}`);
     const bubble = chatMessages.querySelector(`[data-message-id="${messageId}"]`);
     if (bubble) {
         bubble.style.transition = 'opacity 0.5s';
